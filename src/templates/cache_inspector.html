@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hit-or-Miss — Cache Inspector</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        :root { --pico-font-size: 93.75%; }
+        nav { margin-bottom: 1rem; }
+        .model-card { background: var(--pico-card-background-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .model-card h4 { margin-bottom: 0.5rem; }
+        .count-badge { display: inline-block; background: var(--pico-primary); color: #fff; border-radius: 12px; padding: 0.1em 0.6em; font-size: 0.85rem; margin-left: 0.5rem; }
+        table { font-size: 0.85rem; }
+        td.prompt-cell { max-width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul><li><strong>Hit-or-Miss</strong></li></ul>
+        <ul>
+            <li><a href="/playground">Playground</a></li>
+            <li><a href="/cache" class="contrast">Cache Inspector</a></li>
+            <li><a href="/report">Report</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <h2>Cache Inspector</h2>
+
+        <div class="grid">
+            <div>
+                <label for="model-select">Embedding Model</label>
+                <select id="model-select">
+                    {% for key, info in models.items() %}
+                    <option value="{{ key }}" {% if key == active_model %}selected{% endif %}>
+                        {{ info.display_name }} — {{ counts.get(key, 0) }} entries
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="display:flex; align-items:end; gap:0.5rem;">
+                <button id="refresh-btn" class="secondary" onclick="loadEntries()">Refresh</button>
+                <button id="clear-btn" class="contrast" onclick="clearCache()">Clear Cache</button>
+            </div>
+        </div>
+
+        <p>Entries: <strong id="entry-count">{{ entries|length }}</strong></p>
+
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>Prompt</th>
+                    <th>Timestamp</th>
+                    <th>Hit Count</th>
+                    <th>Tokens Used</th>
+                </tr>
+            </thead>
+            <tbody id="entries-table">
+                {% for entry in entries %}
+                <tr>
+                    <td class="prompt-cell" title="{{ entry.prompt }}">{{ entry.prompt[:100] }}{% if entry.prompt|length > 100 %}...{% endif %}</td>
+                    <td>{{ entry.metadata.timestamp[:19] if entry.metadata.timestamp else "—" }}</td>
+                    <td>{{ entry.metadata.hit_count|default(0) }}</td>
+                    <td>{{ entry.metadata.tokens_used|default("—") }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        async function loadEntries() {
+            const model = document.getElementById('model-select').value;
+            const res = await fetch(`/api/cache/entries?model=${encodeURIComponent(model)}`);
+            const data = await res.json();
+            const tbody = document.getElementById('entries-table');
+            document.getElementById('entry-count').textContent = data.entries.length;
+            tbody.innerHTML = data.entries.map(e => `
+                <tr>
+                    <td class="prompt-cell" title="${escapeHtml(e.prompt)}">${escapeHtml(e.prompt.substring(0, 100))}${e.prompt.length > 100 ? '...' : ''}</td>
+                    <td>${e.metadata.timestamp ? e.metadata.timestamp.substring(0, 19) : '—'}</td>
+                    <td>${e.metadata.hit_count || 0}</td>
+                    <td>${e.metadata.tokens_used || '—'}</td>
+                </tr>
+            `).join('');
+        }
+
+        async function clearCache() {
+            if (!confirm('Clear all entries for this model?')) return;
+            const model = document.getElementById('model-select').value;
+            await fetch('/api/cache/clear', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model })
+            });
+            loadEntries();
+        }
+
+        document.getElementById('model-select').addEventListener('change', loadEntries);
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

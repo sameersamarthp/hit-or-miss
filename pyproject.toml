@@ -16,6 +16,7 @@ dependencies = [
     "numpy",
     "jinja2",
     "python-dotenv",
+    "markdown",
 ]
 
 [tool.setuptools.packages.find]
