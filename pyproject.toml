@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hit-or-miss"
+version = "0.1.0"
+description = "Semantic caching for LLM request/response pairs"
+requires-python = ">=3.11"
+dependencies = [
+    "sentence-transformers",
+    "chromadb",
+    "fastapi",
+    "uvicorn[standard]",
+    "httpx",
+    "numpy",
+    "jinja2",
+    "python-dotenv",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

@@ -14,7 +14,7 @@ The POC compares three embedding models (small/medium/large) to analyze how mode
 - **Embedding Models (all local, via sentence-transformers):**
   - Small: `all-MiniLM-L6-v2` (22M params, 384-dim)
   - Medium: `all-mpnet-base-v2` (109M params, 768-dim)
-  - Large: `nomic-ai/nomic-embed-text-v1.5` (137M params, 768-dim)
+  - Large: `BAAI/bge-large-en-v1.5` (335M params, 1024-dim)
 - **LLM Proxy:** Anthropic Claude API (`/v1/messages`). OpenAI support can be added later but is out of scope for now.
 - **HTTP Client:** httpx (async)
 - **Environment:** macOS, Apple M2, 32GB RAM. sentence-transformers will use MPS (Metal) acceleration automatically.
@@ -97,7 +97,7 @@ hit-or-miss/
 ```
 semantic_cache_all-MiniLM-L6-v2         (384-dim vectors)
 semantic_cache_all-mpnet-base-v2        (768-dim vectors)
-semantic_cache_nomic-embed-text-v1.5    (768-dim vectors)
+semantic_cache_BAAI/bge-large-en-v1.5   (1024-dim vectors)
 ```
 
 Each collection stores:
@@ -262,7 +262,7 @@ Server-rendered HTML via Jinja2. Keep it simple — no JS frameworks. Use minima
 ### Benchmark Runner (benchmarks/run_benchmark.py)
 
 ```
-For each model in [MiniLM, mpnet, nomic]:
+For each model in [MiniLM, mpnet, bge-large]:
     For each threshold in [0.80, 0.85, 0.90, 0.95]:
         1. Load the embedding model
         2. Create/clear its ChromaDB collection
@@ -354,7 +354,7 @@ Link to full JSON results
 - Log all cache operations (hit/miss, score, latency) using Python's logging module
 - Use `time.perf_counter()` for latency measurements
 - Handle API key missing gracefully — if no API keys in .env, the proxy endpoints should return a clear error but the playground should still work with cached responses
-- For nomic model, the input text needs to be prefixed with "search_query: " or "search_document: " — handle this in the embedder implementation
+- For BGE models, the query text should be prefixed with "Represent this sentence: " for optimal retrieval — handle this in the embedder implementation
 
 ## Environment Variables (.env)
 
