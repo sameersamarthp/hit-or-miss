@@ -1,0 +1,1412 @@
+{
+  "prompt_groups": [
+    {
+      "id": "linked_list_reverse",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function to reverse a singly linked list",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to reverse a singly linked list"
+        ],
+        "paraphrase": [
+          "Can you implement a function in Python that reverses a singly linked list?",
+          "How do I flip a singly linked list in Python? Give me the code.",
+          "Implement linked list reversal in Python — iterate through and reverse the pointers"
+        ],
+        "close_but_different": [
+          "Write a Python function to sort a singly linked list",
+          "Write a Python function to detect a cycle in a singly linked list"
+        ],
+        "unrelated": [
+          "How do I set up a PostgreSQL database connection pool in Python?"
+        ]
+      }
+    },
+    {
+      "id": "binary_tree_inorder",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function to perform inorder traversal of a binary tree",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to perform inorder traversal of a binary tree"
+        ],
+        "paraphrase": [
+          "How do I traverse a binary tree in-order using Python?",
+          "Implement inorder tree traversal in Python — left, root, right",
+          "Give me Python code to walk a binary tree using inorder traversal"
+        ],
+        "close_but_different": [
+          "Write a Python function to perform preorder traversal of a binary tree",
+          "Write a Python function to find the height of a binary tree"
+        ],
+        "unrelated": [
+          "How do I write a pytest fixture that creates a temporary database?"
+        ]
+      }
+    },
+    {
+      "id": "stack_balanced_parens",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function using a stack to check if parentheses in a string are balanced",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function using a stack to check if parentheses in a string are balanced"
+        ],
+        "paraphrase": [
+          "How do I validate balanced brackets in a string using a stack in Python?",
+          "Implement a Python function that uses a stack to verify matching parentheses",
+          "Write Python code to check if opening and closing brackets are properly matched using a stack"
+        ],
+        "close_but_different": [
+          "Write a Python function using a stack to evaluate a postfix expression",
+          "Write a Python function to count the number of opening parentheses in a string"
+        ],
+        "unrelated": [
+          "How do I make an async HTTP GET request in Python using httpx?"
+        ]
+      }
+    },
+    {
+      "id": "binary_search",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function to perform binary search on a sorted list",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to perform binary search on a sorted list"
+        ],
+        "paraphrase": [
+          "Implement binary search in Python for a sorted array",
+          "How do I search a sorted list efficiently using binary search in Python?",
+          "Give me a Python function that finds an element in a sorted list using binary search"
+        ],
+        "close_but_different": [
+          "Write a Python function to perform linear search on a list",
+          "Write a Python function to find the index of the smallest element in a sorted rotated array"
+        ],
+        "unrelated": [
+          "How do I write a FastAPI middleware to log every incoming request?"
+        ]
+      }
+    },
+    {
+      "id": "merge_sort",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function to sort a list using merge sort",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to sort a list using merge sort"
+        ],
+        "paraphrase": [
+          "Implement the merge sort algorithm in Python",
+          "How do I sort a list with a divide-and-conquer approach in Python using merge sort?",
+          "Can you give me Python code for merge sort that splits and merges sublists?"
+        ],
+        "close_but_different": [
+          "Write a Python function to sort a list using quicksort",
+          "Write a Python function to merge two already-sorted lists"
+        ],
+        "unrelated": [
+          "How do I read all lines from a CSV file and convert them to a list of dicts in Python?"
+        ]
+      }
+    },
+    {
+      "id": "graph_bfs",
+      "domain": "data_structures",
+      "base_prompt": "Write a Python function to perform breadth-first search on a graph represented as an adjacency list",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to perform breadth-first search on a graph represented as an adjacency list"
+        ],
+        "paraphrase": [
+          "Implement BFS traversal in Python for a graph stored as an adjacency list",
+          "How do I explore a graph level by level using BFS in Python?",
+          "Give me Python code that does breadth-first traversal on an adjacency-list graph"
+        ],
+        "close_but_different": [
+          "Write a Python function to perform depth-first search on a graph represented as an adjacency list",
+          "Write a Python function to find the shortest path between two nodes in an unweighted graph"
+        ],
+        "unrelated": [
+          "How do I write a Click CLI command that accepts multiple optional flags?"
+        ]
+      }
+    },
+    {
+      "id": "lru_cache",
+      "domain": "data_structures",
+      "base_prompt": "Implement an LRU cache in Python with get and put operations",
+      "variants": {
+        "exact_duplicate": [
+          "Implement an LRU cache in Python with get and put operations"
+        ],
+        "paraphrase": [
+          "How do I build a least-recently-used cache in Python supporting get and put?",
+          "Write a Python class that implements an LRU cache with O(1) get and put",
+          "Create a Python implementation of an LRU cache that evicts the least recently used item"
+        ],
+        "close_but_different": [
+          "Implement an LFU cache in Python with get and put operations",
+          "Implement a fixed-size queue in Python using a doubly linked list"
+        ],
+        "unrelated": [
+          "How do I mock an external API call in pytest using unittest.mock?"
+        ]
+      }
+    },
+    {
+      "id": "trie_insert_search",
+      "domain": "data_structures",
+      "base_prompt": "Implement a Trie data structure in Python with insert and search methods",
+      "variants": {
+        "exact_duplicate": [
+          "Implement a Trie data structure in Python with insert and search methods"
+        ],
+        "paraphrase": [
+          "How do I build a prefix tree (Trie) in Python with insert and search?",
+          "Write a Python class for a Trie that supports inserting and searching words",
+          "Give me Python code for a Trie with methods to add words and check if a word exists"
+        ],
+        "close_but_different": [
+          "Implement a Trie in Python that also supports a startsWith prefix check",
+          "Implement a hash map in Python with insert, search, and delete operations"
+        ],
+        "unrelated": [
+          "How do I run multiple asyncio tasks concurrently and gather their results?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_crud_route",
+      "domain": "api_development",
+      "base_prompt": "Write a FastAPI route that handles CRUD operations for a User model",
+      "variants": {
+        "exact_duplicate": [
+          "Write a FastAPI route that handles CRUD operations for a User model"
+        ],
+        "paraphrase": [
+          "How do I create create, read, update, and delete endpoints in FastAPI for a User resource?",
+          "Implement REST CRUD endpoints for a User model using FastAPI",
+          "Give me FastAPI code with GET, POST, PUT, and DELETE routes for managing users"
+        ],
+        "close_but_different": [
+          "Write a FastAPI route that handles CRUD operations for a Product model",
+          "Write a FastAPI route that streams a large response using StreamingResponse"
+        ],
+        "unrelated": [
+          "How do I reverse a singly linked list in Python?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_jwt_auth",
+      "domain": "api_development",
+      "base_prompt": "Write FastAPI middleware to authenticate requests using a JWT token",
+      "variants": {
+        "exact_duplicate": [
+          "Write FastAPI middleware to authenticate requests using a JWT token"
+        ],
+        "paraphrase": [
+          "How do I protect FastAPI endpoints by verifying a JWT in a middleware?",
+          "Implement JWT-based authentication middleware in FastAPI",
+          "Create a FastAPI dependency that validates a Bearer JWT token on every request"
+        ],
+        "close_but_different": [
+          "Write FastAPI middleware to authenticate requests using an API key header",
+          "Write a FastAPI route that issues a JWT token on successful login"
+        ],
+        "unrelated": [
+          "How do I write a regex in Python to extract all email addresses from a string?"
+        ]
+      }
+    },
+    {
+      "id": "flask_blueprint",
+      "domain": "api_development",
+      "base_prompt": "How do I organize a Flask application using Blueprints for modular routing?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I organize a Flask application using Blueprints for modular routing?"
+        ],
+        "paraphrase": [
+          "Explain how to use Flask Blueprints to split routes into separate modules",
+          "How can I break a large Flask app into modules using the Blueprint pattern?",
+          "Give me an example of structuring a Flask project with Blueprints for different route groups"
+        ],
+        "close_but_different": [
+          "How do I organize a FastAPI application using APIRouter for modular routing?",
+          "How do I add error handlers to a Flask Blueprint for 404 and 500 responses?"
+        ],
+        "unrelated": [
+          "How do I use asyncio.Queue to communicate between producer and consumer coroutines?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_request_validation",
+      "domain": "api_development",
+      "base_prompt": "How do I use Pydantic models in FastAPI to validate incoming request bodies?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use Pydantic models in FastAPI to validate incoming request bodies?"
+        ],
+        "paraphrase": [
+          "Show me how to define Pydantic schemas in FastAPI to validate POST request data",
+          "How can I ensure request bodies conform to a schema in FastAPI using Pydantic?",
+          "Give me an example of FastAPI endpoint that validates JSON input with a Pydantic model"
+        ],
+        "close_but_different": [
+          "How do I use Pydantic models in FastAPI to validate query parameters?",
+          "How do I return a custom error response when Pydantic validation fails in FastAPI?"
+        ],
+        "unrelated": [
+          "How do I write a Python script to recursively list all files in a directory?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_background_tasks",
+      "domain": "api_development",
+      "base_prompt": "How do I run background tasks in FastAPI after returning a response to the client?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I run background tasks in FastAPI after returning a response to the client?"
+        ],
+        "paraphrase": [
+          "How can I execute work asynchronously after sending a response in FastAPI?",
+          "Show me how to use FastAPI BackgroundTasks to process data after the response is sent",
+          "Give me FastAPI code that triggers a background job once the HTTP response is returned"
+        ],
+        "close_but_different": [
+          "How do I run scheduled periodic tasks in a FastAPI application using APScheduler?",
+          "How do I use FastAPI's lifespan events to run startup and shutdown tasks?"
+        ],
+        "unrelated": [
+          "How do I use argparse to build a CLI tool that accepts subcommands in Python?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_rate_limiting",
+      "domain": "api_development",
+      "base_prompt": "How do I add rate limiting to a FastAPI API to restrict requests per IP?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I add rate limiting to a FastAPI API to restrict requests per IP?"
+        ],
+        "paraphrase": [
+          "Implement per-IP rate limiting in a FastAPI application",
+          "How can I limit how many requests a single IP can make to my FastAPI server?",
+          "Show me how to throttle API requests by IP address in FastAPI"
+        ],
+        "close_but_different": [
+          "How do I add rate limiting to a FastAPI API to restrict requests per user account?",
+          "How do I implement request caching with Redis in a FastAPI application?"
+        ],
+        "unrelated": [
+          "How do I write an asyncio coroutine that retries on failure with exponential backoff?"
+        ]
+      }
+    },
+    {
+      "id": "fastapi_websocket",
+      "domain": "api_development",
+      "base_prompt": "How do I implement a WebSocket endpoint in FastAPI for real-time messaging?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I implement a WebSocket endpoint in FastAPI for real-time messaging?"
+        ],
+        "paraphrase": [
+          "Show me how to create a real-time chat endpoint using WebSockets in FastAPI",
+          "How can I add WebSocket support to my FastAPI app for live bidirectional communication?",
+          "Give me FastAPI code for a WebSocket route that broadcasts messages to connected clients"
+        ],
+        "close_but_different": [
+          "How do I implement server-sent events (SSE) in FastAPI for one-way streaming?",
+          "How do I implement a polling endpoint in FastAPI that checks for new events?"
+        ],
+        "unrelated": [
+          "How do I write a pytest test that parametrizes over multiple input values?"
+        ]
+      }
+    },
+    {
+      "id": "flask_error_handler",
+      "domain": "api_development",
+      "base_prompt": "How do I register custom error handlers in Flask for 404 and 500 status codes?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I register custom error handlers in Flask for 404 and 500 status codes?"
+        ],
+        "paraphrase": [
+          "How can I return custom JSON error responses for 404 and 500 in Flask?",
+          "Show me how to add error handler decorators in Flask for not-found and server errors",
+          "Give me Flask code to catch HTTP 404 and 500 errors and return a JSON body"
+        ],
+        "close_but_different": [
+          "How do I raise a custom exception in Flask and map it to an HTTP error code?",
+          "How do I add request logging middleware to a Flask application?"
+        ],
+        "unrelated": [
+          "How do I encode a Python string to base64 and decode it back?"
+        ]
+      }
+    },
+    {
+      "id": "read_csv_to_dicts",
+      "domain": "file_io",
+      "base_prompt": "Write a Python function to read a CSV file and return a list of dictionaries",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to read a CSV file and return a list of dictionaries"
+        ],
+        "paraphrase": [
+          "How do I parse a CSV file into a list of dicts in Python?",
+          "Give me Python code that loads a CSV and converts each row to a dictionary",
+          "Implement a function in Python that reads a CSV and yields one dict per row"
+        ],
+        "close_but_different": [
+          "Write a Python function to read a CSV file and return a list of tuples",
+          "Write a Python function to write a list of dictionaries to a CSV file"
+        ],
+        "unrelated": [
+          "How do I write a FastAPI endpoint that accepts file uploads?"
+        ]
+      }
+    },
+    {
+      "id": "write_json_file",
+      "domain": "file_io",
+      "base_prompt": "Write a Python function to serialize a Python dictionary to a JSON file",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to serialize a Python dictionary to a JSON file"
+        ],
+        "paraphrase": [
+          "How do I save a Python dict as a JSON file?",
+          "Give me Python code to write a dictionary to disk as formatted JSON",
+          "Implement a function that dumps a Python object to a JSON file with indentation"
+        ],
+        "close_but_different": [
+          "Write a Python function to read a JSON file and return a Python dictionary",
+          "Write a Python function to merge two JSON files into one"
+        ],
+        "unrelated": [
+          "How do I detect a cycle in a directed graph using DFS in Python?"
+        ]
+      }
+    },
+    {
+      "id": "recursive_directory_walk",
+      "domain": "file_io",
+      "base_prompt": "Write a Python function to recursively list all files in a directory with their full paths",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to recursively list all files in a directory with their full paths"
+        ],
+        "paraphrase": [
+          "How do I walk a directory tree in Python and collect all file paths?",
+          "Give me Python code that recursively traverses a folder and returns all file paths",
+          "Implement a Python function using os.walk to find every file under a given directory"
+        ],
+        "close_but_different": [
+          "Write a Python function to recursively list all directories in a directory",
+          "Write a Python function to delete all files matching a pattern in a directory tree"
+        ],
+        "unrelated": [
+          "How do I implement a priority queue in Python using the heapq module?"
+        ]
+      }
+    },
+    {
+      "id": "read_write_text_file",
+      "domain": "file_io",
+      "base_prompt": "Write a Python function to read a text file line by line and return non-empty lines",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to read a text file line by line and return non-empty lines"
+        ],
+        "paraphrase": [
+          "How do I read lines from a file in Python while skipping blank lines?",
+          "Give me Python code that opens a text file and filters out empty lines",
+          "Implement a Python function that yields each non-blank line from a text file"
+        ],
+        "close_but_different": [
+          "Write a Python function to read a text file and return lines that match a regex pattern",
+          "Write a Python function to count the number of words in a text file"
+        ],
+        "unrelated": [
+          "How do I set up a Flask application factory pattern with a config object?"
+        ]
+      }
+    },
+    {
+      "id": "watch_file_changes",
+      "domain": "file_io",
+      "base_prompt": "How do I watch a file for changes in Python and trigger a callback when it is modified?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I watch a file for changes in Python and trigger a callback when it is modified?"
+        ],
+        "paraphrase": [
+          "Give me Python code to monitor a file for modifications and run a function when it changes",
+          "How can I detect when a file on disk is updated in Python and react to it?",
+          "Implement a file watcher in Python that calls a handler when the watched file is modified"
+        ],
+        "close_but_different": [
+          "How do I watch a directory for new files in Python and trigger a callback?",
+          "How do I tail a log file in Python and print new lines as they appear?"
+        ],
+        "unrelated": [
+          "How do I use pytest-mock to patch a class method in a unit test?"
+        ]
+      }
+    },
+    {
+      "id": "atomic_file_write",
+      "domain": "file_io",
+      "base_prompt": "How do I write to a file atomically in Python to avoid partial writes on failure?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write to a file atomically in Python to avoid partial writes on failure?"
+        ],
+        "paraphrase": [
+          "What is the safe way to write a file in Python so a crash does not corrupt it?",
+          "Show me how to do an atomic file write in Python using a temp file and rename",
+          "How can I ensure file writes in Python are all-or-nothing to prevent corruption?"
+        ],
+        "close_but_different": [
+          "How do I lock a file in Python to prevent concurrent writes from multiple processes?",
+          "How do I write a large file in Python in chunks to avoid loading it all into memory?"
+        ],
+        "unrelated": [
+          "How do I use asyncio.gather to run multiple coroutines in parallel in Python?"
+        ]
+      }
+    },
+    {
+      "id": "parse_config_ini",
+      "domain": "file_io",
+      "base_prompt": "How do I read and parse an INI configuration file in Python using configparser?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I read and parse an INI configuration file in Python using configparser?"
+        ],
+        "paraphrase": [
+          "Show me how to use Python's configparser module to load settings from an INI file",
+          "How can I read key-value settings from a .ini file in Python?",
+          "Give me Python code that parses an INI config file and accesses its sections and keys"
+        ],
+        "close_but_different": [
+          "How do I read and parse a YAML configuration file in Python using PyYAML?",
+          "How do I write configuration settings to an INI file in Python using configparser?"
+        ],
+        "unrelated": [
+          "How do I implement quicksort recursively in Python?"
+        ]
+      }
+    },
+    {
+      "id": "compress_files_zip",
+      "domain": "file_io",
+      "base_prompt": "Write a Python function to compress a list of files into a zip archive",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to compress a list of files into a zip archive"
+        ],
+        "paraphrase": [
+          "How do I create a zip file from multiple files in Python?",
+          "Give me Python code to bundle several files into a single .zip archive",
+          "Implement a Python function using zipfile to pack a list of file paths into a zip"
+        ],
+        "close_but_different": [
+          "Write a Python function to extract all files from a zip archive to a directory",
+          "Write a Python function to compress a directory into a tar.gz archive"
+        ],
+        "unrelated": [
+          "How do I write a Click command that reads input from stdin when no file argument is given?"
+        ]
+      }
+    },
+    {
+      "id": "sqlalchemy_model_definition",
+      "domain": "database",
+      "base_prompt": "How do I define a SQLAlchemy ORM model for a User table with id, name, and email columns?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I define a SQLAlchemy ORM model for a User table with id, name, and email columns?"
+        ],
+        "paraphrase": [
+          "Show me how to create a SQLAlchemy model class representing a users table with id, name, email",
+          "How can I map a Python class to a database table with SQLAlchemy ORM including id, name, and email?",
+          "Give me a SQLAlchemy declarative model for a User with integer id, string name, and unique email"
+        ],
+        "close_but_different": [
+          "How do I define a SQLAlchemy ORM model for a Product table with id, name, and price columns?",
+          "How do I add a foreign key relationship between User and Post models in SQLAlchemy?"
+        ],
+        "unrelated": [
+          "How do I use Python's heapq module to implement a min-heap?"
+        ]
+      }
+    },
+    {
+      "id": "sqlalchemy_session_query",
+      "domain": "database",
+      "base_prompt": "How do I query all rows from a SQLAlchemy ORM model where a column matches a value?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I query all rows from a SQLAlchemy ORM model where a column matches a value?"
+        ],
+        "paraphrase": [
+          "Show me how to filter rows in SQLAlchemy ORM by a specific column value",
+          "How can I use SQLAlchemy to select records from a table that match a condition?",
+          "Give me SQLAlchemy code to fetch all users where the email matches a given string"
+        ],
+        "close_but_different": [
+          "How do I query the first matching row from a SQLAlchemy ORM model?",
+          "How do I perform a JOIN query between two SQLAlchemy ORM models?"
+        ],
+        "unrelated": [
+          "How do I add request body logging to a Flask application?"
+        ]
+      }
+    },
+    {
+      "id": "alembic_migration",
+      "domain": "database",
+      "base_prompt": "How do I create and run an Alembic migration to add a new column to an existing table?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I create and run an Alembic migration to add a new column to an existing table?"
+        ],
+        "paraphrase": [
+          "What are the steps to add a column to a database table using Alembic migrations?",
+          "Show me how to write an Alembic migration script that adds a new column",
+          "How can I use Alembic to alter an existing table and add a column without data loss?"
+        ],
+        "close_but_different": [
+          "How do I create and run an Alembic migration to rename an existing column?",
+          "How do I roll back an Alembic migration to the previous revision?"
+        ],
+        "unrelated": [
+          "How do I write an async generator function in Python using asyncio?"
+        ]
+      }
+    },
+    {
+      "id": "raw_sql_query",
+      "domain": "database",
+      "base_prompt": "How do I execute a raw SQL query with parameters safely using SQLAlchemy to avoid SQL injection?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I execute a raw SQL query with parameters safely using SQLAlchemy to avoid SQL injection?"
+        ],
+        "paraphrase": [
+          "Show me how to run a parameterized SQL query in SQLAlchemy without risking SQL injection",
+          "How can I safely pass user input into a raw SQL statement using SQLAlchemy?",
+          "Give me SQLAlchemy code to execute a raw query with bound parameters to prevent injection"
+        ],
+        "close_but_different": [
+          "How do I execute a raw SQL query in SQLAlchemy and fetch the results as dicts?",
+          "How do I execute a bulk insert using raw SQL in SQLAlchemy for performance?"
+        ],
+        "unrelated": [
+          "How do I split a string by multiple delimiters in Python using regex?"
+        ]
+      }
+    },
+    {
+      "id": "postgresql_connection_pool",
+      "domain": "database",
+      "base_prompt": "How do I set up a PostgreSQL connection pool in Python using asyncpg?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I set up a PostgreSQL connection pool in Python using asyncpg?"
+        ],
+        "paraphrase": [
+          "Show me how to create a connection pool for PostgreSQL in Python with asyncpg",
+          "How can I manage a pool of async PostgreSQL connections using asyncpg?",
+          "Give me Python code to initialize an asyncpg pool and execute queries against PostgreSQL"
+        ],
+        "close_but_different": [
+          "How do I set up a PostgreSQL connection pool in Python using psycopg2?",
+          "How do I set up a MySQL connection pool in Python using aiomysql?"
+        ],
+        "unrelated": [
+          "How do I use Python's argparse to build a CLI with mutually exclusive options?"
+        ]
+      }
+    },
+    {
+      "id": "sqlite_in_memory_tests",
+      "domain": "database",
+      "base_prompt": "How do I use an in-memory SQLite database with SQLAlchemy for unit tests?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use an in-memory SQLite database with SQLAlchemy for unit tests?"
+        ],
+        "paraphrase": [
+          "Show me how to configure SQLAlchemy to use SQLite in memory for testing purposes",
+          "How can I create a temporary in-memory database for SQLAlchemy-based unit tests?",
+          "Give me the setup for using SQLAlchemy with an in-memory SQLite DB in a pytest suite"
+        ],
+        "close_but_different": [
+          "How do I use a temporary file-based SQLite database with SQLAlchemy for integration tests?",
+          "How do I mock a SQLAlchemy session in pytest to avoid hitting the real database?"
+        ],
+        "unrelated": [
+          "How do I implement a doubly linked list in Python with insert and delete operations?"
+        ]
+      }
+    },
+    {
+      "id": "upsert_on_conflict",
+      "domain": "database",
+      "base_prompt": "How do I perform an upsert (insert or update on conflict) in PostgreSQL using SQLAlchemy?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I perform an upsert (insert or update on conflict) in PostgreSQL using SQLAlchemy?"
+        ],
+        "paraphrase": [
+          "Show me how to do an insert-or-update operation in PostgreSQL with SQLAlchemy",
+          "How can I use ON CONFLICT DO UPDATE in a SQLAlchemy PostgreSQL query?",
+          "Give me SQLAlchemy code to upsert a row — insert it if new, update it if the key already exists"
+        ],
+        "close_but_different": [
+          "How do I perform a bulk insert in PostgreSQL using SQLAlchemy Core?",
+          "How do I perform an upsert in MySQL using SQLAlchemy with ON DUPLICATE KEY UPDATE?"
+        ],
+        "unrelated": [
+          "How do I rotate log files in Python using the logging module's RotatingFileHandler?"
+        ]
+      }
+    },
+    {
+      "id": "db_pagination",
+      "domain": "database",
+      "base_prompt": "How do I implement pagination for database query results in SQLAlchemy using limit and offset?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I implement pagination for database query results in SQLAlchemy using limit and offset?"
+        ],
+        "paraphrase": [
+          "Show me how to paginate SQLAlchemy query results with limit and offset",
+          "How can I return one page of results at a time from a SQLAlchemy ORM query?",
+          "Give me SQLAlchemy code that fetches page N of results with a configurable page size"
+        ],
+        "close_but_different": [
+          "How do I implement cursor-based pagination in SQLAlchemy for efficient large dataset queries?",
+          "How do I count the total number of results in a SQLAlchemy query before applying pagination?"
+        ],
+        "unrelated": [
+          "How do I format a float to two decimal places in a Python f-string?"
+        ]
+      }
+    },
+    {
+      "id": "asyncio_gather",
+      "domain": "async_programming",
+      "base_prompt": "How do I run multiple async functions concurrently in Python using asyncio.gather?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I run multiple async functions concurrently in Python using asyncio.gather?"
+        ],
+        "paraphrase": [
+          "Show me how to execute several coroutines in parallel with asyncio.gather",
+          "How can I await multiple async tasks at the same time using asyncio in Python?",
+          "Give me Python code to concurrently run a list of coroutines and collect their results"
+        ],
+        "close_but_different": [
+          "How do I run multiple async functions concurrently in Python using asyncio.TaskGroup?",
+          "How do I limit concurrency when running many asyncio tasks using a semaphore?"
+        ],
+        "unrelated": [
+          "How do I build a binary search tree in Python and check if it is balanced?"
+        ]
+      }
+    },
+    {
+      "id": "asyncio_producer_consumer",
+      "domain": "async_programming",
+      "base_prompt": "How do I implement a producer-consumer pattern in Python using asyncio.Queue?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I implement a producer-consumer pattern in Python using asyncio.Queue?"
+        ],
+        "paraphrase": [
+          "Show me how to use asyncio.Queue to coordinate producers and consumers in Python",
+          "How can I build an async producer-consumer pipeline with asyncio queues?",
+          "Give me Python asyncio code where one coroutine produces items and another consumes them via a queue"
+        ],
+        "close_but_different": [
+          "How do I implement a worker pool pattern in Python using asyncio and a semaphore?",
+          "How do I use multiprocessing.Queue to share data between processes in Python?"
+        ],
+        "unrelated": [
+          "How do I read environment variables in Python and provide default values?"
+        ]
+      }
+    },
+    {
+      "id": "asyncio_timeout",
+      "domain": "async_programming",
+      "base_prompt": "How do I add a timeout to an asyncio coroutine in Python so it cancels if it takes too long?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I add a timeout to an asyncio coroutine in Python so it cancels if it takes too long?"
+        ],
+        "paraphrase": [
+          "How can I cancel an async function in Python if it runs longer than a time limit?",
+          "Show me how to use asyncio.wait_for to enforce a timeout on a coroutine",
+          "Give me Python asyncio code that raises an error if a coroutine exceeds a specified duration"
+        ],
+        "close_but_different": [
+          "How do I retry an asyncio coroutine with exponential backoff when it raises an exception?",
+          "How do I cancel a running asyncio task from outside the coroutine in Python?"
+        ],
+        "unrelated": [
+          "How do I write a Flask route that returns paginated results from a database?"
+        ]
+      }
+    },
+    {
+      "id": "async_http_client",
+      "domain": "async_programming",
+      "base_prompt": "How do I make concurrent async HTTP requests in Python using httpx and asyncio?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I make concurrent async HTTP requests in Python using httpx and asyncio?"
+        ],
+        "paraphrase": [
+          "Show me how to send multiple HTTP requests in parallel using httpx AsyncClient",
+          "How can I fetch several URLs concurrently in Python with httpx and asyncio.gather?",
+          "Give me Python code that uses httpx to make many async HTTP GET requests simultaneously"
+        ],
+        "close_but_different": [
+          "How do I make concurrent async HTTP requests in Python using aiohttp and asyncio?",
+          "How do I handle HTTP request retries with exponential backoff using httpx in Python?"
+        ],
+        "unrelated": [
+          "How do I use Click to create a CLI command group with multiple subcommands in Python?"
+        ]
+      }
+    },
+    {
+      "id": "asyncio_semaphore",
+      "domain": "async_programming",
+      "base_prompt": "How do I limit the number of concurrent asyncio tasks using asyncio.Semaphore?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I limit the number of concurrent asyncio tasks using asyncio.Semaphore?"
+        ],
+        "paraphrase": [
+          "Show me how to use asyncio.Semaphore to cap concurrency in a Python async program",
+          "How can I ensure only N coroutines run at the same time using a semaphore in asyncio?",
+          "Give me Python asyncio code that throttles concurrent tasks with a semaphore"
+        ],
+        "close_but_different": [
+          "How do I limit the number of concurrent asyncio tasks using asyncio.BoundedSemaphore?",
+          "How do I use asyncio.Lock to prevent concurrent access to a shared resource?"
+        ],
+        "unrelated": [
+          "How do I write a SQL query to find duplicate rows in a table by a specific column?"
+        ]
+      }
+    },
+    {
+      "id": "async_context_manager",
+      "domain": "async_programming",
+      "base_prompt": "How do I write an async context manager in Python using __aenter__ and __aexit__?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write an async context manager in Python using __aenter__ and __aexit__?"
+        ],
+        "paraphrase": [
+          "Show me how to implement an async context manager class in Python for use with async with",
+          "How can I create a Python class that works as an async context manager with async with?",
+          "Give me an example of defining __aenter__ and __aexit__ to make an async context manager"
+        ],
+        "close_but_different": [
+          "How do I write a synchronous context manager in Python using __enter__ and __exit__?",
+          "How do I use contextlib.asynccontextmanager to create an async context manager from a generator?"
+        ],
+        "unrelated": [
+          "How do I write a Python regex to validate an IPv4 address?"
+        ]
+      }
+    },
+    {
+      "id": "event_loop_run",
+      "domain": "async_programming",
+      "base_prompt": "How do I run an async function from synchronous Python code using asyncio?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I run an async function from synchronous Python code using asyncio?"
+        ],
+        "paraphrase": [
+          "Show me how to call an async Python function from a normal synchronous context",
+          "How can I execute a coroutine from regular (non-async) Python code?",
+          "Give me the pattern for running an asyncio coroutine in a script that does not use async def main"
+        ],
+        "close_but_different": [
+          "How do I run synchronous code inside an asyncio event loop without blocking it?",
+          "How do I run an async function from a Jupyter notebook cell?"
+        ],
+        "unrelated": [
+          "How do I compress a directory into a zip file in Python?"
+        ]
+      }
+    },
+    {
+      "id": "async_generator",
+      "domain": "async_programming",
+      "base_prompt": "How do I write an async generator in Python that yields values one at a time from an async source?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write an async generator in Python that yields values one at a time from an async source?"
+        ],
+        "paraphrase": [
+          "Show me how to create an async generator function in Python using async def and yield",
+          "How can I stream results from an async data source in Python using an async generator?",
+          "Give me an example of an async generator that yields items fetched asynchronously"
+        ],
+        "close_but_different": [
+          "How do I consume an async generator in Python using async for?",
+          "How do I write a synchronous generator in Python that lazily yields processed values?"
+        ],
+        "unrelated": [
+          "How do I define a many-to-many relationship between two SQLAlchemy models?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_fixture_scope",
+      "domain": "testing",
+      "base_prompt": "How do I write a pytest fixture with session scope that is shared across all tests in a session?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write a pytest fixture with session scope that is shared across all tests in a session?"
+        ],
+        "paraphrase": [
+          "Show me how to create a session-scoped pytest fixture that runs once for the entire test suite",
+          "How can I define a pytest fixture that is initialized once and reused by every test?",
+          "Give me a pytest fixture example using scope='session' to share setup across all tests"
+        ],
+        "close_but_different": [
+          "How do I write a pytest fixture with function scope that is set up and torn down for each test?",
+          "How do I write a pytest fixture with module scope that is shared across tests in a file?"
+        ],
+        "unrelated": [
+          "How do I create a FastAPI dependency that injects a database session into a route?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_parametrize",
+      "domain": "testing",
+      "base_prompt": "How do I use pytest.mark.parametrize to run a test with multiple sets of inputs?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use pytest.mark.parametrize to run a test with multiple sets of inputs?"
+        ],
+        "paraphrase": [
+          "Show me how to parametrize a pytest test to cover several input-output pairs",
+          "How can I run the same pytest test function with different arguments using parametrize?",
+          "Give me a pytest example where one test is executed with multiple different parameter combinations"
+        ],
+        "close_but_different": [
+          "How do I combine pytest.mark.parametrize with another mark like pytest.mark.skip?",
+          "How do I use pytest's indirect parametrize to pass parameters through a fixture?"
+        ],
+        "unrelated": [
+          "How do I use asyncio.wait to run tasks and handle whichever finishes first?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_mock_patch",
+      "domain": "testing",
+      "base_prompt": "How do I use unittest.mock.patch in pytest to replace a function with a mock?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use unittest.mock.patch in pytest to replace a function with a mock?"
+        ],
+        "paraphrase": [
+          "Show me how to mock a function during a pytest test using patch",
+          "How can I stub out an external function call in pytest with unittest.mock?",
+          "Give me a pytest test that patches a dependency so the real function is never called"
+        ],
+        "close_but_different": [
+          "How do I use unittest.mock.patch to replace an entire class with a mock in pytest?",
+          "How do I use pytest-mock's mocker fixture to patch a function in a test?"
+        ],
+        "unrelated": [
+          "How do I list all tables in a PostgreSQL database using psycopg2?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_custom_assertion",
+      "domain": "testing",
+      "base_prompt": "How do I write a custom pytest assertion helper that produces a clear failure message?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write a custom pytest assertion helper that produces a clear failure message?"
+        ],
+        "paraphrase": [
+          "Show me how to create a reusable assertion function in pytest with informative error messages",
+          "How can I build a helper in pytest that asserts complex conditions with good failure output?",
+          "Give me an example of a pytest utility function that wraps assert and explains failures clearly"
+        ],
+        "close_but_different": [
+          "How do I write a custom pytest plugin that adds a new command-line option?",
+          "How do I write a pytest conftest.py that registers a custom marker?"
+        ],
+        "unrelated": [
+          "How do I reverse a string in Python without using built-in reverse functions?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_tmp_directory",
+      "domain": "testing",
+      "base_prompt": "How do I use pytest's tmp_path fixture to create temporary files in a test?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use pytest's tmp_path fixture to create temporary files in a test?"
+        ],
+        "paraphrase": [
+          "Show me how to create and use a temporary directory in pytest using tmp_path",
+          "How can I write a pytest test that creates temp files without leaving them on disk after the test?",
+          "Give me a pytest example using the built-in tmp_path fixture to write and read a temporary file"
+        ],
+        "close_but_different": [
+          "How do I use pytest's monkeypatch fixture to temporarily set an environment variable?",
+          "How do I use Python's tempfile module to create a temporary file outside of pytest?"
+        ],
+        "unrelated": [
+          "How do I implement depth-first search iteratively using a stack in Python?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_exception_raises",
+      "domain": "testing",
+      "base_prompt": "How do I assert that a function raises a specific exception in pytest?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I assert that a function raises a specific exception in pytest?"
+        ],
+        "paraphrase": [
+          "Show me how to test that calling a function throws an expected exception using pytest.raises",
+          "How can I verify in pytest that a piece of code raises a ValueError?",
+          "Give me a pytest test that checks a function raises the correct exception type and message"
+        ],
+        "close_but_different": [
+          "How do I assert that a function does NOT raise an exception in pytest?",
+          "How do I assert that a function raises an exception only under certain conditions in pytest?"
+        ],
+        "unrelated": [
+          "How do I read a YAML file in Python and access its nested keys?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_async_test",
+      "domain": "testing",
+      "base_prompt": "How do I write an async pytest test for a coroutine using pytest-asyncio?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write an async pytest test for a coroutine using pytest-asyncio?"
+        ],
+        "paraphrase": [
+          "Show me how to test an async Python function in pytest with pytest-asyncio",
+          "How can I use pytest to test asyncio coroutines by marking tests with @pytest.mark.asyncio?",
+          "Give me a pytest-asyncio example that tests an async function returning a value"
+        ],
+        "close_but_different": [
+          "How do I write an async pytest test that mocks an async function using AsyncMock?",
+          "How do I run async pytest tests without pytest-asyncio using asyncio.run?"
+        ],
+        "unrelated": [
+          "How do I append a row to an existing CSV file in Python?"
+        ]
+      }
+    },
+    {
+      "id": "pytest_conftest",
+      "domain": "testing",
+      "base_prompt": "How do I use a conftest.py file in pytest to share fixtures across multiple test files?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use a conftest.py file in pytest to share fixtures across multiple test files?"
+        ],
+        "paraphrase": [
+          "Show me how to define shared pytest fixtures in conftest.py so multiple test modules can use them",
+          "How can I make a pytest fixture available to all tests in a project without importing it?",
+          "Give me an example of a conftest.py that provides a shared database fixture to all test files"
+        ],
+        "close_but_different": [
+          "How do I use conftest.py to define pytest hooks like pytest_runtest_setup?",
+          "How do I override a fixture defined in conftest.py for a specific test module?"
+        ],
+        "unrelated": [
+          "How do I generate a UUID in Python and format it as a string?"
+        ]
+      }
+    },
+    {
+      "id": "argparse_subcommands",
+      "domain": "cli_tools",
+      "base_prompt": "How do I use argparse in Python to create a CLI with multiple subcommands?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use argparse in Python to create a CLI with multiple subcommands?"
+        ],
+        "paraphrase": [
+          "Show me how to build a multi-subcommand CLI in Python using argparse",
+          "How can I add subcommands like 'run', 'stop', and 'status' to a Python CLI with argparse?",
+          "Give me an argparse example with subparsers so each subcommand has its own arguments"
+        ],
+        "close_but_different": [
+          "How do I use Click in Python to create a CLI with multiple subcommands?",
+          "How do I add a --version flag to a Python CLI built with argparse?"
+        ],
+        "unrelated": [
+          "How do I set up Alembic for database migrations in a FastAPI project?"
+        ]
+      }
+    },
+    {
+      "id": "click_command_group",
+      "domain": "cli_tools",
+      "base_prompt": "How do I create a Click command group in Python with multiple subcommands?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I create a Click command group in Python with multiple subcommands?"
+        ],
+        "paraphrase": [
+          "Show me how to use Click's @click.group decorator to organize a CLI with several commands",
+          "How can I build a CLI tool in Python using Click where commands are grouped together?",
+          "Give me a Click example with a group and two subcommands that share a common option"
+        ],
+        "close_but_different": [
+          "How do I create a Click command that chains multiple commands together in a pipeline?",
+          "How do I add a global --verbose flag to all commands in a Click group?"
+        ],
+        "unrelated": [
+          "How do I use asyncio.Lock to synchronize access to a shared variable in Python?"
+        ]
+      }
+    },
+    {
+      "id": "cli_stdin_pipe",
+      "domain": "cli_tools",
+      "base_prompt": "How do I write a Python CLI script that reads input from stdin when no file argument is provided?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I write a Python CLI script that reads input from stdin when no file argument is provided?"
+        ],
+        "paraphrase": [
+          "Show me how to make a Python CLI tool read from a file or fall back to stdin",
+          "How can I build a Python command-line script that accepts piped input if no filename is given?",
+          "Give me Python code for a CLI that processes a file argument or reads stdin as a fallback"
+        ],
+        "close_but_different": [
+          "How do I write a Python CLI script that writes output to stdout or a file based on a flag?",
+          "How do I make a Python CLI script read from multiple input files passed as arguments?"
+        ],
+        "unrelated": [
+          "How do I use SQLAlchemy to query records and order them by a timestamp column?"
+        ]
+      }
+    },
+    {
+      "id": "click_progress_bar",
+      "domain": "cli_tools",
+      "base_prompt": "How do I display a progress bar in a Python CLI using Click?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I display a progress bar in a Python CLI using Click?"
+        ],
+        "paraphrase": [
+          "Show me how to add a terminal progress bar to a Click CLI command in Python",
+          "How can I show task progress in a Python Click command as it iterates over items?",
+          "Give me a Click CLI example that renders a progress bar while processing a list of items"
+        ],
+        "close_but_different": [
+          "How do I display a progress bar in a Python CLI using the tqdm library?",
+          "How do I display a spinner animation in a Python CLI using Click?"
+        ],
+        "unrelated": [
+          "How do I write a Python function to flatten a nested list of arbitrary depth?"
+        ]
+      }
+    },
+    {
+      "id": "cli_config_file",
+      "domain": "cli_tools",
+      "base_prompt": "How do I load CLI default values from a config file using Click?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I load CLI default values from a config file using Click?"
+        ],
+        "paraphrase": [
+          "Show me how to configure Click CLI defaults from a YAML or INI config file",
+          "How can I make a Click command read its default option values from a configuration file?",
+          "Give me a Click example where missing CLI arguments fall back to values in a config file"
+        ],
+        "close_but_different": [
+          "How do I load CLI default values from environment variables using Click?",
+          "How do I save user preferences to a config file from a Click CLI command?"
+        ],
+        "unrelated": [
+          "How do I use Python's functools.lru_cache to memoize a recursive function?"
+        ]
+      }
+    },
+    {
+      "id": "cli_colorized_output",
+      "domain": "cli_tools",
+      "base_prompt": "How do I print colorized output to the terminal in a Python CLI script?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I print colorized output to the terminal in a Python CLI script?"
+        ],
+        "paraphrase": [
+          "Show me how to add colored text to terminal output in a Python CLI using Click or colorama",
+          "How can I print green success and red error messages in a Python command-line tool?",
+          "Give me Python code to output styled terminal text with colors using ANSI codes or a library"
+        ],
+        "close_but_different": [
+          "How do I print colorized output to the terminal in a Python CLI that also supports --no-color?",
+          "How do I format a Python CLI table output with aligned columns using rich or tabulate?"
+        ],
+        "unrelated": [
+          "How do I write a pytest fixture that yields a populated SQLAlchemy database session?"
+        ]
+      }
+    },
+    {
+      "id": "cli_interactive_prompt",
+      "domain": "cli_tools",
+      "base_prompt": "How do I prompt the user for confirmation before a destructive action in a Python CLI?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I prompt the user for confirmation before a destructive action in a Python CLI?"
+        ],
+        "paraphrase": [
+          "Show me how to ask for a yes/no confirmation in a Python CLI before deleting something",
+          "How can I add an interactive confirmation prompt to a Click CLI command?",
+          "Give me Python code that pauses and asks 'Are you sure?' before running a destructive operation"
+        ],
+        "close_but_different": [
+          "How do I prompt the user to enter a password securely in a Python CLI?",
+          "How do I use Click to prompt the user for a required argument when it is not provided?"
+        ],
+        "unrelated": [
+          "How do I implement a max-heap in Python using the heapq module?"
+        ]
+      }
+    },
+    {
+      "id": "argparse_type_validation",
+      "domain": "cli_tools",
+      "base_prompt": "How do I add type validation and custom error messages to argparse arguments in Python?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I add type validation and custom error messages to argparse arguments in Python?"
+        ],
+        "paraphrase": [
+          "Show me how to validate argparse arguments with a custom type function",
+          "How can I make argparse reject invalid input and show a helpful error in Python?",
+          "Give me an argparse example with a custom type converter that raises ArgumentTypeError on bad input"
+        ],
+        "close_but_different": [
+          "How do I add type validation to Click options using a custom ParamType in Python?",
+          "How do I restrict an argparse argument to a fixed set of choices in Python?"
+        ],
+        "unrelated": [
+          "How do I write a Python generator that reads a large file in chunks?"
+        ]
+      }
+    },
+    {
+      "id": "regex_email_extraction",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to extract all email addresses from a block of text using regex",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to extract all email addresses from a block of text using regex"
+        ],
+        "paraphrase": [
+          "How do I use Python regex to find every email address in a string?",
+          "Give me Python code that scans a text and pulls out all email addresses using re.findall",
+          "Implement a Python function using regex to collect all email addresses from a multi-line string"
+        ],
+        "close_but_different": [
+          "Write a Python function to validate whether a single string is a valid email address using regex",
+          "Write a Python function to extract all phone numbers from a block of text using regex"
+        ],
+        "unrelated": [
+          "How do I define a one-to-many relationship between two models in SQLAlchemy?"
+        ]
+      }
+    },
+    {
+      "id": "string_camel_to_snake",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to convert a camelCase string to snake_case",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to convert a camelCase string to snake_case"
+        ],
+        "paraphrase": [
+          "How do I transform a camelCase identifier to snake_case in Python?",
+          "Give me Python code to convert camelCase variable names to underscore-separated snake_case",
+          "Implement a Python function that takes a camelCase string and returns its snake_case equivalent"
+        ],
+        "close_but_different": [
+          "Write a Python function to convert a snake_case string to camelCase",
+          "Write a Python function to convert a PascalCase string to snake_case"
+        ],
+        "unrelated": [
+          "How do I create a pytest fixture that starts a FastAPI test client?"
+        ]
+      }
+    },
+    {
+      "id": "string_truncate_ellipsis",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to truncate a string to a maximum length and append an ellipsis if truncated",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to truncate a string to a maximum length and append an ellipsis if truncated"
+        ],
+        "paraphrase": [
+          "How do I shorten a string to N characters and add '...' at the end in Python?",
+          "Give me Python code that clips a string at a max length and appends an ellipsis when it overflows",
+          "Implement a function in Python that truncates text to a given limit, adding '...' if the text was cut"
+        ],
+        "close_but_different": [
+          "Write a Python function to pad a string to a minimum length with spaces",
+          "Write a Python function to wrap a long string into lines of a maximum width"
+        ],
+        "unrelated": [
+          "How do I use asyncio.Event to signal between coroutines in Python?"
+        ]
+      }
+    },
+    {
+      "id": "regex_url_validation",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to validate whether a string is a valid URL using regex",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to validate whether a string is a valid URL using regex"
+        ],
+        "paraphrase": [
+          "How do I check if a string is a valid URL using a regular expression in Python?",
+          "Give me Python regex code that returns True if a string looks like a valid HTTP or HTTPS URL",
+          "Implement a Python function that uses re.match to verify a string follows a valid URL format"
+        ],
+        "close_but_different": [
+          "Write a Python function to extract the domain name from a URL string",
+          "Write a Python function to validate whether a string is a valid IPv4 address using regex"
+        ],
+        "unrelated": [
+          "How do I use Python's subprocess module to run a shell command and capture its output?"
+        ]
+      }
+    },
+    {
+      "id": "string_count_words",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to count the frequency of each word in a string and return a dictionary",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to count the frequency of each word in a string and return a dictionary"
+        ],
+        "paraphrase": [
+          "How do I compute word frequencies from a text string and return them as a dict in Python?",
+          "Give me Python code to count how many times each word appears in a given string",
+          "Implement a Python function that splits a string into words and returns a frequency map"
+        ],
+        "close_but_different": [
+          "Write a Python function to count the frequency of each character in a string and return a dictionary",
+          "Write a Python function to return the top 10 most common words in a string"
+        ],
+        "unrelated": [
+          "How do I run a background task in FastAPI that sends an email after the response is returned?"
+        ]
+      }
+    },
+    {
+      "id": "string_format_template",
+      "domain": "string_manipulation",
+      "base_prompt": "How do I use Python's string Template class to safely substitute variables into a template string?",
+      "variants": {
+        "exact_duplicate": [
+          "How do I use Python's string Template class to safely substitute variables into a template string?"
+        ],
+        "paraphrase": [
+          "Show me how to use string.Template in Python to perform variable substitution with $-placeholders",
+          "How can I substitute values into a template string in Python without using f-strings?",
+          "Give me Python code that uses string.Template to fill a template with a dictionary of values"
+        ],
+        "close_but_different": [
+          "How do I use Python's Jinja2 library to render a template string with variable substitution?",
+          "How do I use Python's string format_map to substitute values from a dictionary into a string?"
+        ],
+        "unrelated": [
+          "How do I set up a connection to Redis in Python and use it as a cache?"
+        ]
+      }
+    },
+    {
+      "id": "base64_encode_decode",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to encode a string to base64 and another to decode it back",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to encode a string to base64 and another to decode it back"
+        ],
+        "paraphrase": [
+          "How do I encode and decode a string using base64 in Python?",
+          "Give me Python code that converts a string to its base64 representation and reverses it",
+          "Implement Python functions to base64-encode a UTF-8 string and decode it back to text"
+        ],
+        "close_but_different": [
+          "Write a Python function to encode binary data to base64 and save it to a file",
+          "Write a Python function to encode a string using URL-safe base64 in Python"
+        ],
+        "unrelated": [
+          "How do I write a FastAPI endpoint that accepts and validates a JSON array as the request body?"
+        ]
+      }
+    },
+    {
+      "id": "string_levenshtein",
+      "domain": "string_manipulation",
+      "base_prompt": "Write a Python function to compute the Levenshtein edit distance between two strings",
+      "variants": {
+        "exact_duplicate": [
+          "Write a Python function to compute the Levenshtein edit distance between two strings"
+        ],
+        "paraphrase": [
+          "How do I calculate the edit distance between two strings in Python?",
+          "Give me Python code to find the minimum number of single-character edits to transform one string into another",
+          "Implement the Levenshtein distance algorithm in Python using dynamic programming"
+        ],
+        "close_but_different": [
+          "Write a Python function to compute the longest common subsequence between two strings",
+          "Write a Python function to check if two strings are anagrams of each other"
+        ],
+        "unrelated": [
+          "How do I use argparse to accept a list of values for a single argument in Python?"
+        ]
+      }
+    }
+  ]
+}
