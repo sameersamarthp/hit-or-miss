@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hit-or-Miss — Playground</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        :root { --pico-font-size: 93.75%; }
+        nav { margin-bottom: 1rem; }
+        .badge { display: inline-block; padding: 0.2em 0.6em; border-radius: 4px; font-weight: 700; font-size: 0.85rem; }
+        .badge-hit { background: #2ecc40; color: #fff; }
+        .badge-miss { background: #e74c3c; color: #fff; }
+        .timings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
+        .timing-box { background: var(--pico-card-background-color); border-radius: 8px; padding: 0.5rem 0.75rem; text-align: center; }
+        .timing-box small { display: block; color: var(--pico-muted-color); }
+        .timing-box strong { font-size: 1.1rem; }
+        .matched-prompt { background: var(--pico-card-background-color); border-left: 3px solid #2ecc40; padding: 0.5rem 0.75rem; margin: 0.5rem 0; font-style: italic; }
+        #response-text { white-space: pre-wrap; }
+        table { font-size: 0.85rem; }
+        #recent-log td:first-child { width: 60%; }
+        .slider-value { font-weight: 700; font-family: monospace; }
+        #result-panel { display: none; }
+        #loading { display: none; }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul><li><strong>Hit-or-Miss</strong></li></ul>
+        <ul>
+            <li><a href="/playground" class="contrast">Playground</a></li>
+            <li><a href="/cache">Cache Inspector</a></li>
+            <li><a href="/report">Report</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <h2>Prompt Playground</h2>
+        <form id="prompt-form">
+            <label for="prompt">Prompt</label>
+            <textarea id="prompt" name="prompt" rows="4" placeholder="Enter your prompt here..."></textarea>
+            <div class="grid">
+                <div>
+                    <label for="model">Embedding Model</label>
+                    <select id="model" name="model">
+                        {% for key, info in models.items() %}
+                        <option value="{{ key }}" {% if key == active_model %}selected{% endif %}>
+                            {{ info.display_name }} ({{ info.dimension }}d)
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="threshold">
+                        Similarity Threshold: <span class="slider-value" id="threshold-display">{{ "%.2f"|format(threshold) }}</span>
+                    </label>
+                    <input type="range" id="threshold" name="threshold" min="0.70" max="0.99" step="0.01" value="{{ threshold }}">
+                </div>
+            </div>
+            <button type="submit" id="submit-btn">Send</button>
+            <span id="loading" aria-busy="true">Processing...</span>
+        </form>
+
+        <section id="result-panel">
+            <hr>
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
+                <span id="cache-badge" class="badge"></span>
+                <span id="similarity-display"></span>
+            </div>
+            <div id="matched-section" style="display:none;">
+                <small>Matched cached prompt:</small>
+                <div class="matched-prompt" id="matched-prompt-text"></div>
+            </div>
+            <div class="timings-grid" id="timings-grid"></div>
+            <h4 style="margin-top:1rem;">Response</h4>
+            <pre id="response-text"></pre>
+        </section>
+
+        <hr>
+        <h4>Recent Queries</h4>
+        <table role="grid">
+            <thead>
+                <tr><th>Prompt</th><th>Status</th><th>Similarity</th><th>Total (ms)</th></tr>
+            </thead>
+            <tbody id="recent-log">
+                {% for q in recent_queries %}
+                <tr>
+                    <td>{{ q.prompt[:80] }}{% if q.prompt|length > 80 %}...{% endif %}</td>
+                    <td><span class="badge {{ 'badge-hit' if q.cache_hit else 'badge-miss' }}">{{ "HIT" if q.cache_hit else "MISS" }}</span></td>
+                    <td>{{ "%.4f"|format(q.similarity_score) }}</td>
+                    <td>{{ "%.1f"|format(q.timings.total_ms) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        const thresholdSlider = document.getElementById('threshold');
+        const thresholdDisplay = document.getElementById('threshold-display');
+        thresholdSlider.addEventListener('input', () => {
+            thresholdDisplay.textContent = parseFloat(thresholdSlider.value).toFixed(2);
+        });
+
+        document.getElementById('prompt-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const prompt = document.getElementById('prompt').value.trim();
+            if (!prompt) return;
+
+            const model = document.getElementById('model').value;
+            const threshold = parseFloat(thresholdSlider.value);
+
+            const submitBtn = document.getElementById('submit-btn');
+            const loading = document.getElementById('loading');
+            submitBtn.disabled = true;
+            loading.style.display = 'inline';
+
+            try {
+                const res = await fetch('/api/playground', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, model, threshold })
+                });
+                const data = await res.json();
+
+                // Show result panel
+                document.getElementById('result-panel').style.display = 'block';
+
+                // Badge
+                const badge = document.getElementById('cache-badge');
+                badge.textContent = data.cache_hit ? 'HIT' : 'MISS';
+                badge.className = 'badge ' + (data.cache_hit ? 'badge-hit' : 'badge-miss');
+
+                // Similarity
+                document.getElementById('similarity-display').textContent =
+                    'Similarity: ' + data.similarity_score.toFixed(4);
+
+                // Matched prompt
+                const matchedSection = document.getElementById('matched-section');
+                if (data.cache_hit && data.matched_prompt) {
+                    matchedSection.style.display = 'block';
+                    document.getElementById('matched-prompt-text').textContent = data.matched_prompt;
+                } else {
+                    matchedSection.style.display = 'none';
+                }
+
+                // Timings
+                const timings = data.timings;
+                const grid = document.getElementById('timings-grid');
+                grid.innerHTML = `
+                    <div class="timing-box"><small>Embed</small><strong>${timings.embed_ms.toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>Search</small><strong>${timings.search_ms.toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>LLM</small><strong>${timings.llm_ms.toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>Total</small><strong>${timings.total_ms.toFixed(1)}ms</strong></div>
+                `;
+
+                // Response text
+                const responseText = data.response.content
+                    .filter(b => b.type === 'text')
+                    .map(b => b.text)
+                    .join('\n');
+                document.getElementById('response-text').textContent = responseText;
+
+                // Update recent queries table
+                const tbody = document.getElementById('recent-log');
+                const row = document.createElement('tr');
+                const truncated = prompt.length > 80 ? prompt.substring(0, 80) + '...' : prompt;
+                row.innerHTML = `
+                    <td>${escapeHtml(truncated)}</td>
+                    <td><span class="badge ${data.cache_hit ? 'badge-hit' : 'badge-miss'}">${data.cache_hit ? 'HIT' : 'MISS'}</span></td>
+                    <td>${data.similarity_score.toFixed(4)}</td>
+                    <td>${timings.total_ms.toFixed(1)}</td>
+                `;
+                tbody.insertBefore(row, tbody.firstChild);
+                // Keep only 20 rows
+                while (tbody.children.length > 20) tbody.removeChild(tbody.lastChild);
+
+            } catch (err) {
+                alert('Error: ' + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

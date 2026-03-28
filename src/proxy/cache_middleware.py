@@ -1,6 +1,8 @@
+import collections
 import json
 import logging
 import time
+from dataclasses import dataclass, field
 
 from src.cache.chroma_cache import ChromaCacheStore
 from src.config import DEFAULT_EMBEDDING_MODEL, DEFAULT_SIMILARITY_THRESHOLD, EMBEDDING_MODELS
@@ -8,6 +10,8 @@ from src.embeddings.sentence_transformer import SentenceTransformerEmbedder
 from src.proxy.llm_proxy import LLMProxy
 
 logger = logging.getLogger(__name__)
+
+MAX_RECENT_QUERIES = 20
 
 
 def _extract_prompt_text(body: dict) -> str:
@@ -60,6 +64,10 @@ class CacheMiddleware:
         self._llm_proxy = LLMProxy()
         self._active_model: str = DEFAULT_EMBEDDING_MODEL
         self._threshold: float = DEFAULT_SIMILARITY_THRESHOLD
+        self._total_requests: int = 0
+        self._total_hits: int = 0
+        self._total_latency_ms: float = 0.0
+        self._recent_queries: collections.deque[dict] = collections.deque(maxlen=MAX_RECENT_QUERIES)
 
     @property
     def active_model(self) -> str:
@@ -136,7 +144,7 @@ class CacheMiddleware:
                 "stop_reason": "end_turn",
             }
             total_ms = (time.perf_counter() - total_start) * 1000
-            return {
+            result = {
                 "response": cached_response,
                 "cache_hit": True,
                 "similarity_score": cache_result.similarity_score,
@@ -148,6 +156,8 @@ class CacheMiddleware:
                     "total_ms": round(total_ms, 2),
                 },
             }
+            self._track(prompt_text, result)
+            return result
 
         # --- Cache MISS: forward to LLM ---
         llm_start = time.perf_counter()
@@ -166,7 +176,7 @@ class CacheMiddleware:
         )
 
         total_ms = (time.perf_counter() - total_start) * 1000
-        return {
+        result = {
             "response": llm_response,
             "cache_hit": False,
             "similarity_score": cache_result.similarity_score,
@@ -178,6 +188,41 @@ class CacheMiddleware:
                 "total_ms": round(total_ms, 2),
             },
         }
+        self._track(prompt_text, result)
+        return result
+
+    def _track(self, prompt_text: str, result: dict) -> None:
+        """Update stats and recent queries log."""
+        self._total_requests += 1
+        if result["cache_hit"]:
+            self._total_hits += 1
+        self._total_latency_ms += result["timings"]["total_ms"]
+        self._recent_queries.appendleft({
+            "prompt": prompt_text[:120],
+            "cache_hit": result["cache_hit"],
+            "similarity_score": result["similarity_score"],
+            "timings": result["timings"],
+            "model": self._active_model,
+        })
+
+    def get_stats(self) -> dict:
+        """Return aggregate cache statistics."""
+        cache = self._get_cache(self._active_model)
+        return {
+            "active_model": self._active_model,
+            "threshold": self._threshold,
+            "total_requests": self._total_requests,
+            "total_hits": self._total_hits,
+            "hit_rate": round(self._total_hits / self._total_requests, 4) if self._total_requests else 0,
+            "avg_latency_ms": round(self._total_latency_ms / self._total_requests, 2) if self._total_requests else 0,
+            "cache_entries": cache.count(),
+        }
+
+    def get_recent_queries(self) -> list[dict]:
+        return list(self._recent_queries)
+
+    def get_cache_for_model(self, model_name: str) -> ChromaCacheStore:
+        return self._get_cache(model_name)
 
     async def close(self) -> None:
         await self._llm_proxy.close()

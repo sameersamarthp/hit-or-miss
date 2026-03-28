@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hit-or-Miss — Benchmark Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        :root { --pico-font-size: 93.75%; }
+        nav { margin-bottom: 1rem; }
+        .report-content table { width: 100%; }
+        .report-content th, .report-content td { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+        .no-report { text-align: center; padding: 3rem; color: var(--pico-muted-color); }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul><li><strong>Hit-or-Miss</strong></li></ul>
+        <ul>
+            <li><a href="/playground">Playground</a></li>
+            <li><a href="/cache">Cache Inspector</a></li>
+            <li><a href="/report" class="contrast">Report</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        {% if report_html %}
+        <article class="report-content">
+            {{ report_html | safe }}
+        </article>
+        {% else %}
+        <div class="no-report">
+            <h3>No benchmark report found</h3>
+            <p>Run the benchmark first:</p>
+            <pre><code>python benchmarks/run_benchmark.py
+python benchmarks/generate_report.py</code></pre>
+        </div>
+        {% endif %}
+    </main>
+</body>
+</html>
