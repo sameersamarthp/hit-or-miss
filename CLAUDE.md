@@ -6,6 +6,99 @@
 
 The POC compares three embedding models (small/medium/large) to analyze how model size affects semantic matching quality, latency, and overall cache effectiveness.
 
+## Architecture Overview
+
+### System Diagram
+
+```
+                            Hit-or-Miss System
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │                                                                     │
+ │   User Prompt                                                       │
+ │       │                                                             │
+ │       ▼                                                             │
+ │   ┌────────────┐     ┌──────────────────────────────────────────┐   │
+ │   │  FastAPI    │     │         Embedding Models                 │   │
+ │   │  /v1/messages│     │                                          │   │
+ │   │  /playground│     │  ┌─────────┐ ┌─────────┐ ┌───────────┐  │   │
+ │   └─────┬──────┘     │  │ MiniLM  │ │  MPNet  │ │ BGE-Large │  │   │
+ │         │            │  │  (22M)  │ │ (109M)  │ │  (335M)   │  │   │
+ │         ▼            │  │ 384-dim │ │ 768-dim │ │ 1024-dim  │  │   │
+ │   ┌────────────┐     │  └────┬────┘ └────┬────┘ └─────┬─────┘  │   │
+ │   │   Cache    │     │       │            │            │         │   │
+ │   │ Middleware │◄────┤       └────────────┼────────────┘         │   │
+ │   └─────┬──────┘     │          Active model selected            │   │
+ │         │            └──────────────────────────────────────────┘   │
+ │         │                                                           │
+ │         ▼                                                           │
+ │   ┌──────────┐        ┌─────────────────────────────────────────┐   │
+ │   │ Embed    │        │            ChromaDB (Persistent)         │   │
+ │   │ Prompt   │───────►│                                         │   │
+ │   └──────────┘        │  ┌─────────────────────────────────┐    │   │
+ │         │             │  │ semantic_cache_all-MiniLM-L6-v2 │    │   │
+ │         ▼             │  │         (384-dim vectors)        │    │   │
+ │   ┌──────────┐        │  ├─────────────────────────────────┤    │   │
+ │   │ Search   │◄──────►│  │ semantic_cache_all-mpnet-base-v2│    │   │
+ │   │ Nearest  │        │  │         (768-dim vectors)        │    │   │
+ │   │ Neighbor │        │  ├─────────────────────────────────┤    │   │
+ │   └─────┬────┘        │  │ semantic_cache_BAAI_bge-large   │    │   │
+ │         │             │  │        (1024-dim vectors)        │    │   │
+ │         ▼             │  └─────────────────────────────────┘    │   │
+ │   ┌──────────┐        │                                         │   │
+ │   │Similarity│        │  Each collection stores:                │   │
+ │   │  Check   │        │  • id (SHA-256 hash of prompt)         │   │
+ │   │ >= 0.85? │        │  • embedding vector                    │   │
+ │   └────┬─────┘        │  • document (original prompt text)     │   │
+ │        │              │  • metadata (response, timestamp,      │   │
+ │   ┌────┴────┐         │    hit_count, tokens_used)             │   │
+ │   │         │         └─────────────────────────────────────────┘   │
+ │   ▼         ▼                                                       │
+ │  HIT      MISS                                                     │
+ │   │         │                                                       │
+ │   │         ▼                                                       │
+ │   │   ┌───────────┐    ┌──────────────┐                            │
+ │   │   │ Forward   │───►│ Anthropic    │                            │
+ │   │   │ to LLM    │    │ Claude API   │                            │
+ │   │   └───────────┘    └──────┬───────┘                            │
+ │   │         │                 │                                     │
+ │   │         ▼                 │                                     │
+ │   │   ┌───────────┐          │                                     │
+ │   │   │ Store in  │◄─────────┘                                     │
+ │   │   │ ChromaDB  │  (prompt + embedding + response)               │
+ │   │   └─────┬─────┘                                                │
+ │   │         │                                                       │
+ │   ▼         ▼                                                       │
+ │  ┌──────────────┐                                                   │
+ │  │Return Response│                                                  │
+ │  │ + Cache Info  │                                                  │
+ │  └──────────────┘                                                   │
+ │                                                                     │
+ └─────────────────────────────────────────────────────────────────────┘
+```
+
+### How It Works
+
+**Three Embedding Models, Three Collections:**
+The system uses three sentence-transformer models of increasing size (MiniLM 22M → MPNet 109M → BGE-Large 335M). Each model produces embeddings in a different dimensional space (384 → 768 → 1024 dims), so they cannot share a vector store. ChromaDB maintains one collection per model — embeddings from different models are never mixed. Models are lazy-loaded on first use; switching models in the UI just changes which collection is queried.
+
+**Query Flow — Cache Hit:**
+1. User sends a prompt via the API or playground UI
+2. The active embedding model converts the prompt text into a vector
+3. ChromaDB searches the model's collection for the nearest neighbor (cosine similarity)
+4. If similarity >= threshold (default 0.85): return the cached response directly — no LLM call, response in ~10-25ms instead of ~1-3s
+
+**Query Flow — Cache Miss:**
+1. Same steps 1-3, but similarity is below threshold
+2. The prompt is forwarded to the Anthropic Claude API
+3. When the response comes back, the prompt embedding + LLM response are stored in ChromaDB
+4. Future similar prompts can now match against this new entry
+5. The cache grows organically with every miss
+
+**Key Design Decisions:**
+- Cosine similarity with configurable threshold balances hit rate vs false positive rate
+- Each miss enriches the cache — the system gets more effective over time
+- Benchmark results show BGE-Large catches 80% of paraphrases vs 59% for MiniLM, at the cost of 2x embedding latency (still negligible vs LLM call time)
+
 ## Tech Stack
 
 - **Language:** Python 3.11+
