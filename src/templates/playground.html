@@ -79,12 +79,13 @@
         <h4>Recent Queries</h4>
         <table role="grid">
             <thead>
-                <tr><th>Prompt</th><th>Status</th><th>Similarity</th><th>Total (ms)</th></tr>
+                <tr><th>Prompt</th><th>Model</th><th>Status</th><th>Similarity</th><th>Total (ms)</th></tr>
             </thead>
             <tbody id="recent-log">
                 {% for q in recent_queries %}
                 <tr>
                     <td>{{ q.prompt[:80] }}{% if q.prompt|length > 80 %}...{% endif %}</td>
+                    <td>{{ q.model }}</td>
                     <td><span class="badge {{ 'badge-hit' if q.cache_hit else 'badge-miss' }}">{{ "HIT" if q.cache_hit else "MISS" }}</span></td>
                     <td>{{ "%.4f"|format(q.similarity_score) }}</td>
                     <td>{{ "%.1f"|format(q.timings.total_ms) }}</td>
@@ -122,6 +123,11 @@
                 });
                 const data = await res.json();
 
+                if (!res.ok) {
+                    alert('Error: ' + (data.detail || JSON.stringify(data)));
+                    return;
+                }
+
                 // Show result panel
                 document.getElementById('result-panel').style.display = 'block';
 
@@ -132,7 +138,7 @@
 
                 // Similarity
                 document.getElementById('similarity-display').textContent =
-                    'Similarity: ' + data.similarity_score.toFixed(4);
+                    'Similarity: ' + (data.similarity_score ?? 0).toFixed(4);
 
                 // Matched prompt
                 const matchedSection = document.getElementById('matched-section');
@@ -144,13 +150,13 @@
                 }
 
                 // Timings
-                const timings = data.timings;
+                const timings = data.timings || {};
                 const grid = document.getElementById('timings-grid');
                 grid.innerHTML = `
-                    <div class="timing-box"><small>Embed</small><strong>${timings.embed_ms.toFixed(1)}ms</strong></div>
-                    <div class="timing-box"><small>Search</small><strong>${timings.search_ms.toFixed(1)}ms</strong></div>
-                    <div class="timing-box"><small>LLM</small><strong>${timings.llm_ms.toFixed(1)}ms</strong></div>
-                    <div class="timing-box"><small>Total</small><strong>${timings.total_ms.toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>Embed</small><strong>${(timings.embed_ms ?? 0).toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>Search</small><strong>${(timings.search_ms ?? 0).toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>LLM</small><strong>${(timings.llm_ms ?? 0).toFixed(1)}ms</strong></div>
+                    <div class="timing-box"><small>Total</small><strong>${(timings.total_ms ?? 0).toFixed(1)}ms</strong></div>
                 `;
 
                 // Response text
@@ -166,9 +172,10 @@
                 const truncated = prompt.length > 80 ? prompt.substring(0, 80) + '...' : prompt;
                 row.innerHTML = `
                     <td>${escapeHtml(truncated)}</td>
+                    <td>${escapeHtml(model)}</td>
                     <td><span class="badge ${data.cache_hit ? 'badge-hit' : 'badge-miss'}">${data.cache_hit ? 'HIT' : 'MISS'}</span></td>
-                    <td>${data.similarity_score.toFixed(4)}</td>
-                    <td>${timings.total_ms.toFixed(1)}</td>
+                    <td>${(data.similarity_score ?? 0).toFixed(4)}</td>
+                    <td>${(timings.total_ms ?? 0).toFixed(1)}</td>
                 `;
                 tbody.insertBefore(row, tbody.firstChild);
                 // Keep only 20 rows
