@@ -100,32 +100,24 @@ def generate_report(data: dict) -> str:
     w()
 
     # --- Comparison Table ---
+    # Sort so that chroma+BGE and redis+BGE appear next to each other per threshold.
+    # Primary sort: model, threshold, backend — this groups same model+threshold together
+    # with chroma before redis.
     w("## Full Comparison Table")
     w()
     w("| Backend | Model | Threshold | Hit Rate | Precision | Recall | F1 | FP Rate | Avg Embed (ms) | Avg Search (ms) |")
     w("|---------|-------|-----------|----------|-----------|--------|----|---------|----------------|-----------------|")
-    for a in sorted(aggregates, key=lambda x: (x.get("backend", "chroma"), x["model"], x["threshold"])):
+    sorted_aggs = sorted(aggregates, key=lambda x: (x["model"], x["threshold"], x.get("backend", "chroma")))
+    for a in sorted_aggs:
         backend = a.get("backend", "chroma")
-        w(f"| {backend} | {a['model']} | {a['threshold']} | {a['hit_rate']*100:.1f}% | {a['precision']:.4f} | {a['recall']:.4f} | {a['f1']:.4f} | {a['false_positive_rate']*100:.1f}% | {a['avg_embed_latency_ms']:.1f} | {a['avg_search_latency_ms']:.1f} |")
+        is_bge = "bge-large" in a["model"].lower()
+        if is_bge:
+            w(f"| **{backend}** | **{a['model']}** | **{a['threshold']}** | **{a['hit_rate']*100:.1f}%** | **{a['precision']:.4f}** | **{a['recall']:.4f}** | **{a['f1']:.4f}** | **{a['false_positive_rate']*100:.1f}%** | **{a['avg_embed_latency_ms']:.1f}** | **{a['avg_search_latency_ms']:.1f}** |")
+        else:
+            w(f"| {backend} | {a['model']} | {a['threshold']} | {a['hit_rate']*100:.1f}% | {a['precision']:.4f} | {a['recall']:.4f} | {a['f1']:.4f} | {a['false_positive_rate']*100:.1f}% | {a['avg_embed_latency_ms']:.1f} | {a['avg_search_latency_ms']:.1f} |")
     w()
 
-    # --- Threshold Sensitivity ---
-    w("## Threshold Sensitivity Analysis")
-    w()
-    # Group by backend+model
     combos_in_run = sorted(set((a.get("backend", "chroma"), a["model"]) for a in aggregates))
-    for backend, model in combos_in_run:
-        w(f"### {backend.capitalize()} + {model}")
-        w()
-        w("| Threshold | Hit Rate | Precision | Recall | F1 | FP Rate |")
-        w("|-----------|----------|-----------|--------|----|---------|")
-        combo_results = sorted(
-            [a for a in aggregates if a.get("backend", "chroma") == backend and a["model"] == model],
-            key=lambda x: x["threshold"],
-        )
-        for a in combo_results:
-            w(f"| {a['threshold']} | {a['hit_rate']*100:.1f}% | {a['precision']:.4f} | {a['recall']:.4f} | {a['f1']:.4f} | {a['false_positive_rate']*100:.1f}% |")
-        w()
 
     # --- Results by Category ---
     w("## Results by Category")
