@@ -17,6 +17,8 @@ dependencies = [
     "jinja2",
     "python-dotenv",
     "markdown",
+    "redis",
+    "redisvl",
 ]
 
 [tool.setuptools.packages.find]
