@@ -5,6 +5,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from src.config import EMBEDDING_MODELS
@@ -21,7 +22,7 @@ middleware = CacheMiddleware()
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-REPORT_PATH = Path(__file__).resolve().parent.parent / "reports" / "benchmark_report.md"
+REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 
 
 @asynccontextmanager
@@ -34,6 +35,11 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Hit-or-Miss", version="0.1.0", lifespan=lifespan)
+
+# Serve chart images from reports/charts/
+CHARTS_DIR = REPORTS_DIR / "charts"
+if CHARTS_DIR.exists():
+    app.mount("/charts", StaticFiles(directory=str(CHARTS_DIR)), name="charts")
 
 
 # ---------------------------------------------------------------------------
@@ -218,9 +224,13 @@ async def cache_inspector(request: Request):
 @app.get("/report", response_class=HTMLResponse)
 async def report_page(request: Request):
     report_html = None
-    if REPORT_PATH.exists():
-        md_content = REPORT_PATH.read_text()
+    # Find the most recently modified benchmark report
+    report_files = sorted(REPORTS_DIR.glob("benchmark_report*.md"), key=lambda p: p.stat().st_mtime, reverse=True)
+    if report_files:
+        md_content = report_files[0].read_text()
         report_html = markdown.markdown(md_content, extensions=["tables", "fenced_code"])
+        # Rewrite relative chart paths to absolute URLs for the static mount
+        report_html = report_html.replace('src="charts/', 'src="/charts/')
     return templates.TemplateResponse(request, "report.html", {
         "report_html": report_html,
     })

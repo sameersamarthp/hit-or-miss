@@ -20,6 +20,20 @@ Quick mode: No
   - Accuracy is identical (same embeddings, same similarity math)
   - Search latency: Redis 4.7ms vs ChromaDB 0.9ms (0.2x slower)
 
+## Charts
+
+### Category Hit Rates Across Thresholds
+![Category Hit Rates](charts/fig1_category_hit_rates.png)
+
+### Precision, Recall & F1 Across Thresholds
+![Precision Recall F1](charts/fig2_precision_recall_f1.png)
+
+### Backend Comparison — ChromaDB vs Redis (BGE-Large)
+![Backend Comparison](charts/fig3_backend_comparison.png)
+
+### Category Hit Rates at Best F1 Threshold Per Model
+![Model Comparison](charts/fig4_model_comparison.png)
+
 ## Full Comparison Table
 
 | Backend | Model | Threshold | Hit Rate | Precision | Recall | F1 | FP Rate | Avg Embed (ms) | Avg Search (ms) |
