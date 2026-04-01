@@ -23,15 +23,31 @@ Quick mode: No
 ## Charts
 
 ### Category Hit Rates Across Thresholds
+**Key Takeaway: BGE-Large maintains high paraphrase detection (~94%) even at threshold 0.85, while MiniLM and MPNet
+drop sharply — the larger model gives you a much wider "usable threshold range" before paraphrase recall
+collapses**
+
 ![Category Hit Rates](charts/fig1_category_hit_rates.png)
 
 ### Precision, Recall & F1 Across Thresholds
+**Key Takeaway: For all models, recall drops far faster than precision as threshold increases, meaning raising the
+threshold mostly costs you cache hits (savings) rather than gaining you accuracy — the diminishing returns
+kick in hard after 0.85**
+
 ![Precision Recall F1](charts/fig2_precision_recall_f1.png)
 
 ### Backend Comparison — ChromaDB vs Redis (BGE-Large)
+
+**Key Takeaway: The vector store choice has zero impact on accuracy (identical F1 bars), but ChromaDB is 4-5x faster
+on search at this scale due to in-process execution vs Redis's TCP overhead**
+
 ![Backend Comparison](charts/fig3_backend_comparison.png)
 
 ### Category Hit Rates at Best F1 Threshold Per Model
+**Key Takeaway: BGE-Large's paraphrase advantage (94% vs 48-57%) comes at a steep cost: its false positive rate on
+close-but-different prompts (74%) is nearly 3x worse than the smaller models (28%), showing that the bigger
+model is more aggressive across the board, not just on correct matches**
+
 ![Model Comparison](charts/fig4_model_comparison.png)
 
 ## Full Comparison Table
